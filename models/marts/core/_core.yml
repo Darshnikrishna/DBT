@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: customers
+    description: one record per customers
+    columns: 
+      - name: customer_id
+      description: primary key
+        tests:
+          - unique
+          - not_null
+
+  - name: orders
+    columns:
+      - name: order_id
+      description: order_id should be unique, it should not contain same value for 2 orders
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values:
+                - completed
+                - shipped
+                - returned
+                - return_pending
+                - placed
